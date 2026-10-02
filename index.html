@@ -1,0 +1,489 @@
+<title>Family Skills Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<style>
+/* Layout: classic single-column site, one container with generous even side padding; white cards on an off-white page */
+:root {
+  --bg: #F6F5F2;
+  --card: #FFFFFF;
+  --ink: #1C1C1C;
+  --muted: #666666;
+  --line: #E5E3DE;
+  --accent: #1F3B4D;
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-size: 16px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.container { width: 100%; max-width: 1080px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 48px); }
+
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+h2 { font-size: clamp(26px, 3.2vw, 34px); }
+h3 { font-size: 20px; }
+p { margin: 0; }
+ul { margin: 0; padding-left: 20px; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.btn {
+  display: inline-block; background: var(--accent); color: #FFFFFF;
+  font: 500 15px/1 var(--font); padding: 14px 24px; border-radius: 8px;
+  border: 1px solid var(--accent); text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: #172E3C; }
+.btn.outline { background: transparent; color: var(--accent); }
+.btn.outline:hover { background: var(--card); }
+.btn.small { padding: 10px 18px; font-size: 14px; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: clamp(24px, 4vw, 40px); }
+
+/* Header */
+.site-header { background: var(--bg); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.logo { font-weight: 600; font-size: 17px; color: var(--ink); text-decoration: none; }
+.menu { display: flex; align-items: center; gap: 32px; }
+.menu a:not(.btn) { color: var(--ink); text-decoration: none; font-size: 15px; }
+.menu a:not(.btn):hover { color: var(--accent); }
+@media (max-width: 760px) { .menu a:not(.btn) { display: none; } }
+
+/* Sections */
+section { padding-block: clamp(64px, 9vw, 104px); }
+.intro { max-width: 640px; margin-bottom: 48px; }
+.intro p { color: var(--muted); margin-top: 14px; }
+
+/* Hero */
+.hero { padding-block: clamp(64px, 10vw, 120px); }
+.hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center; }
+.hero-grid > * { min-width: 0; }
+.hero h1 { font-size: clamp(36px, 5.4vw, 54px); letter-spacing: -0.02em; }
+.hero p.lead { font-size: 18px; color: var(--muted); margin-top: 20px; max-width: 34em; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.at-a-glance dl { margin: 0; display: grid; gap: 18px; }
+.at-a-glance dt { font-size: 14px; color: var(--muted); }
+.at-a-glance dd { margin: 2px 0 0; font-weight: 500; }
+.at-a-glance h3 { font-size: 17px; margin-bottom: 22px; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
+.about-grid > * { min-width: 0; }
+.about-text { display: grid; gap: 18px; }
+.about-text h2 { margin-bottom: 4px; }
+.learn h3 { font-size: 17px; margin-bottom: 16px; }
+.learn ul { display: grid; gap: 12px; }
+.learn li strong { font-weight: 500; }
+.learn li span { display: block; color: var(--muted); font-size: 15px; }
+.who { margin-top: 8px; color: var(--muted); }
+.who strong { color: var(--ink); font-weight: 500; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.diff { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--line); }
+.diff > div { min-width: 0; }
+.diff h3 { font-size: 17px; }
+.diff p { color: var(--muted); font-size: 15px; margin-top: 6px; }
+@media (max-width: 760px) { .diff { grid-template-columns: 1fr; } }
+
+/* Sessions */
+#sessions { background: var(--card); border-block: 1px solid var(--line); }
+#sessions .card { background: var(--bg); }
+.sessions { display: grid; gap: 24px; }
+.session-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.session-head .label { font-size: 14px; color: var(--muted); }
+.session-head h3 { flex-basis: 100%; font-size: clamp(20px, 2.4vw, 24px); }
+.when { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: 15px; margin-top: 16px; }
+.when span { color: var(--muted); }
+.when strong { font-weight: 500; color: var(--ink); }
+.session-body { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 28px; }
+.session-body > * { min-width: 0; }
+.session-body h4 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+.session-body p + h4, .session-body ul + p, .session-body ul + h4 { margin-top: 24px; }
+.session-body p { color: var(--muted); }
+.session-body ul { display: grid; gap: 6px; }
+.agenda { list-style: none; padding: 0; display: grid; gap: 0 !important; }
+.agenda li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding-block: 10px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.agenda li:last-child { border-bottom: 0; }
+.agenda .min { color: var(--muted); font-variant-numeric: tabular-nums; }
+.takeaway { margin-top: 20px; font-size: 15px; }
+.takeaway strong { font-weight: 600; }
+@media (max-width: 860px) { .session-body { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Details */
+.details-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; }
+.details-grid > * { min-width: 0; }
+.details-grid h3 { font-size: 18px; margin-bottom: 20px; }
+@media (max-width: 860px) { .details-grid { grid-template-columns: 1fr; } }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 460px; }
+th { text-align: left; font-weight: 500; color: var(--muted); font-size: 14px; padding: 0 12px 10px 0; border-bottom: 1px solid var(--line); }
+td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+.address { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; }
+.address p { color: var(--muted); }
+.address p:first-child { color: var(--ink); font-weight: 500; }
+.contact-list { display: grid; gap: 16px; }
+.contact-list div { display: grid; }
+.contact-list span { font-size: 14px; color: var(--muted); }
+.contact-list strong { font-weight: 500; word-break: break-word; }
+.contact-note { margin-top: 20px; font-size: 14px; color: var(--muted); }
+
+/* Registration */
+#register .container { max-width: 760px; }
+#register .intro { text-align: center; margin-inline: auto; }
+form { display: grid; gap: 20px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+.field { display: grid; gap: 6px; min-width: 0; }
+label, legend { font-size: 14px; font-weight: 500; }
+input[type=text], input[type=email], input[type=tel], select, textarea {
+  width: 100%; font: 400 15px var(--font); color: var(--ink);
+  background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); background: var(--card); }
+textarea { resize: vertical; min-height: 96px; }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
+legend { margin-bottom: 4px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 15px; }
+.check input { margin-top: 6px; accent-color: var(--accent); }
+.status { font-size: 14px; }
+.status.err { color: #B3261E; }
+.done { text-align: center; display: grid; gap: 12px; justify-items: center; }
+.done p { color: var(--muted); max-width: 32em; }
+
+footer { border-top: 1px solid var(--line); padding-block: 32px; font-size: 14px; color: var(--muted); }
+footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+</style>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#top">Family Skills Workshop</a>
+    <nav class="menu">
+      <a href="#about">About</a>
+      <a href="#sessions">Sessions</a>
+      <a href="#details">Details</a>
+      <a href="#contact">Contact</a>
+      <a class="btn small" href="#register">Register</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>A Pathway to Building Everyday Strength</h1>
+        <p class="lead">A free three-session workshop for parents, couples, and young adults. Learn calm ways to talk, work through disagreements, and build habits that keep your family close. No crisis needed, just curiosity and a willingness to grow.</p>
+        <div class="actions">
+          <a class="btn" href="#register">Reserve a seat</a>
+          <a class="btn outline" href="#sessions">View sessions</a>
+        </div>
+      </div>
+      <aside class="card at-a-glance">
+        <h3>At a glance</h3>
+        <dl>
+          <div><dt>Dates</dt><dd>Saturdays, October 17, 24 &amp; 31, 2026</dd></div>
+          <div><dt>Time</dt><dd>10:00 a.m., 75 to 90 minutes</dd></div>
+          <div><dt>Location</dt><dd>Madison Library, Rexburg, Idaho</dd></div>
+          <div><dt>Cost</dt><dd>Free</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>About the workshop</h2>
+          <p>The Family Skills Workshop teaches simple, research-based skills that help families communicate better, handle disagreements more calmly, and stay connected through stressful seasons. It is designed for parents, couples, and caregivers at any stage, including parents and their young adult children (ages 18 to 30) who are learning to relate to each other in a new way.</p>
+          <p>This is learning, not counseling. No one receives a diagnosis, and you will never be asked to share personal stories. Every activity is optional. Parents and young adults learn the same tools side by side, practice them together, and leave with a plan they can start using the same day.</p>
+          <p>The content draws on family science and peace-building coursework at BYU-Idaho, including PEACE 101 and FAML 420, along with the work of researchers such as John Gottman, Froma Walsh, and Daniel Siegel.</p>
+          <p class="who"><strong>Who should attend:</strong> parents of children ages 5 to 18, parents of young adults, young adults ages 18 to 30, married couples, fathers and father figures, and grandparents or other caregivers.</p>
+        </div>
+        <div class="card learn">
+          <h3>What you will learn</h3>
+          <ul>
+            <li><strong>Why conflict happens</strong><span>How family systems, stress, and life changes shape the way family members react to each other.</span></li>
+            <li><strong>How to communicate with respect</strong><span>Reflective listening and "I" statements instead of blaming or jumping to conclusions.</span></li>
+            <li><strong>How to solve problems as a team</strong><span>Repairing after an argument instead of fighting or shutting down.</span></li>
+            <li><strong>How to build lasting habits</strong><span>A written plan of daily check-ins, weekly rituals, and repair strategies.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="diff">
+        <div><h3>Not therapy</h3><p>A friendly, judgment-free class. You learn and practice skills; no one is assessed or diagnosed.</p></div>
+        <div><h3>Before a crisis</h3><p>A proactive step for families who want to grow stronger now, much like a fitness class for relationships.</p></div>
+        <div><h3>Practiced together</h3><p>Unlike videos or books, you rehearse each skill with a partner or family member and get coaching on the spot.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sessions">
+    <div class="container">
+      <div class="intro">
+        <h2>The sessions</h2>
+        <p>Each session pairs a short teaching segment with guided practice. Attend all three for the full experience, or choose the sessions that fit your family best.</p>
+      </div>
+      <div class="sessions">
+
+        <article class="card">
+          <div class="session-head">
+            <span class="label">Session 1</span>
+            <h3>Communication Foundations: Talking and Listening with Respect</h3>
+          </div>
+          <div class="when">
+            <span>Date <strong>Saturday, October 17, 2026</strong></span>
+            <span>Time <strong>10:00 to 11:30 a.m.</strong></span>
+            <span>Location <strong>Madison Library, Community Room</strong></span>
+          </div>
+          <div class="session-body">
+            <div>
+              <p>Learn why conflicts happen between family members, especially as children grow into independent adults, and practice the core skills of calm, respectful communication.</p>
+              <h4>Learning goals</h4>
+              <ul>
+                <li>Explain what a family system is and how one person's stress affects everyone.</li>
+                <li>Recognize common patterns that turn small disagreements into arguments.</li>
+                <li>Use "I" statements and reflective listening in a practice conversation.</li>
+              </ul>
+              <p class="takeaway"><strong>You will leave with</strong> an "I" statement guide and one specific conversation to practice at home.</p>
+            </div>
+            <div>
+              <h4>Agenda</h4>
+              <ul class="agenda">
+                <li><span class="min">10 min</span><span>Welcome and a short family scenario to set the stage</span></li>
+                <li><span class="min">20 min</span><span>How family conflict works, explained with everyday examples</span></li>
+                <li><span class="min">25 min</span><span>"I" statement practice in pairs</span></li>
+                <li><span class="min">25 min</span><span>Group discussion and shared examples</span></li>
+                <li><span class="min">10 min</span><span>Closing and take-home challenge</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="session-head">
+            <span class="label">Session 2</span>
+            <h3>Strengthening Father–Child Relationships Through Connection</h3>
+          </div>
+          <div class="when">
+            <span>Date <strong>Saturday, October 24, 2026</strong></span>
+            <span>Time <strong>10:00 to 11:15 a.m.</strong></span>
+            <span>Location <strong>Madison Library, Community Room</strong></span>
+          </div>
+          <div class="session-body">
+            <div>
+              <p>For fathers and father figures of children ages 5 to 18, and the co-parents and caregivers who support them. Learn how small, consistent moments of connection build a child's emotional security.</p>
+              <h4>Learning goals</h4>
+              <ul>
+                <li>Identify three research-based practices that strengthen father–child connection.</li>
+                <li>Demonstrate reflective listening or "I feel, I need" statements with a partner.</li>
+                <li>Create a 7-day plan with two connection activities suited to your child's age.</li>
+                <li>Describe how warm, consistent father involvement supports long-term well-being.</li>
+              </ul>
+              <p class="takeaway"><strong>You will leave with</strong> a summary of the three connection pillars, a listening guide, and your 7-Day Connection Plan.</p>
+            </div>
+            <div>
+              <h4>Agenda</h4>
+              <ul class="agenda">
+                <li><span class="min">8 min</span><span>Opening reflection on a recent moment of connection</span></li>
+                <li><span class="min">18 min</span><span>The three pillars: presence, emotional attunement, and repair</span></li>
+                <li><span class="min">20 min</span><span>Reflective listening demonstration and pair practice</span></li>
+                <li><span class="min">15 min</span><span>Writing your 7-day connection plan</span></li>
+                <li><span class="min">6 min</span><span>Closing and personal commitment</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="session-head">
+            <span class="label">Session 3</span>
+            <h3>Strengthening Family Resilience Through Intentional Connection</h3>
+          </div>
+          <div class="when">
+            <span>Date <strong>Saturday, October 31, 2026</strong></span>
+            <span>Time <strong>10:00 to 11:30 a.m.</strong></span>
+            <span>Location <strong>Madison Library, Community Room</strong></span>
+          </div>
+          <div class="session-body">
+            <div>
+              <p>Resilience comes from consistent, intentional connection, not from the absence of problems. This session brings the series together and helps you design a plan your family can keep.</p>
+              <h4>Learning goals</h4>
+              <ul>
+                <li>Apply daily check-ins, shared rituals, and repair conversations at home.</li>
+                <li>Understand how emotional regulation shapes the way families handle stress.</li>
+                <li>Design a personal 30-Day Family Resilience Action Plan.</li>
+                <li>Evaluate how family rituals affect relationships and children's well-being.</li>
+              </ul>
+              <p class="takeaway"><strong>You will leave with</strong> a repair conversation guide, a family ritual worksheet, your 30-day action plan, and a resource list.</p>
+            </div>
+            <div>
+              <h4>Agenda</h4>
+              <ul class="agenda">
+                <li><span class="min">10 min</span><span>Welcome, review, and an opening scenario</span></li>
+                <li><span class="min">20 min</span><span>The resilience framework with short video examples</span></li>
+                <li><span class="min">25 min</span><span>Practicing repair conversations and designing a family ritual</span></li>
+                <li><span class="min">20 min</span><span>Writing your 30-day action plan</span></li>
+                <li><span class="min">15 min</span><span>Closing reflection and resources</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="container">
+      <div class="intro">
+        <h2>Schedule and contact</h2>
+        <p>All sessions meet in person. Seating is limited, so please register in advance.</p>
+      </div>
+      <div class="details-grid">
+        <div class="card">
+          <h3>Schedule</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Session</th><th>Date</th><th>Time</th></tr></thead>
+              <tbody>
+                <tr><td>1. Communication Foundations</td><td>Sat, Oct 17, 2026</td><td>10:00–11:30 a.m.</td></tr>
+                <tr><td>2. Father–Child Connection</td><td>Sat, Oct 24, 2026</td><td>10:00–11:15 a.m.</td></tr>
+                <tr><td>3. Family Resilience</td><td>Sat, Oct 31, 2026</td><td>10:00–11:30 a.m.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="address">
+            <p>Madison Library, Community Room</p>
+            <p>73 N Center Street, Rexburg, ID 83440</p>
+            <p>Free parking is available beside the building. The room is wheelchair accessible.</p>
+          </div>
+        </div>
+        <div class="card" id="contact">
+          <h3>Contact</h3>
+          <div class="contact-list">
+            <div><span>Facilitator</span><strong>Cynthia Ifeoma John</strong></div>
+            <div><span>Email</span><strong>familyskillsworkshop@gmail.com</strong></div>
+            <div><span>Phone or text</span><strong>(208) 555-0142</strong></div>
+          </div>
+          <p class="contact-note">Questions about accessibility, childcare, or which session is right for you? Reach out any time. You will receive a reply within one business day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="register">
+    <div class="container">
+      <div class="intro">
+        <h2>Register</h2>
+        <p>Registration is free. Choose the sessions you plan to attend, and you will receive a reminder before each one.</p>
+      </div>
+      <div class="card">
+        <form id="reg" novalidate>
+          <div class="row2">
+            <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="remail">Email</label><input id="remail" name="email" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="rphone">Phone (optional)</label><input id="rphone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="party">Number attending</label>
+              <select id="party" name="party"><option>1</option><option>2</option><option>3</option><option>4</option><option>5 or more</option></select>
+            </div>
+          </div>
+          <div class="field"><label for="role">I am attending as a</label>
+            <select id="role" name="role">
+              <option>Parent</option>
+              <option>Young adult (18 to 30)</option>
+              <option>Couple</option>
+              <option>Father or father figure</option>
+              <option>Grandparent or caregiver</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <fieldset>
+            <legend>Sessions</legend>
+            <label class="check"><input type="checkbox" id="s1" name="sessions" value="Session 1" checked> Session 1: Communication Foundations (October 17)</label>
+            <label class="check"><input type="checkbox" id="s2" name="sessions" value="Session 2" checked> Session 2: Father–Child Connection (October 24)</label>
+            <label class="check"><input type="checkbox" id="s3" name="sessions" value="Session 3" checked> Session 3: Family Resilience (October 31)</label>
+          </fieldset>
+          <div class="field"><label for="notes">Anything we should know? (optional)</label><textarea id="notes" name="notes" placeholder="Accessibility needs, questions, or topics you hope we cover"></textarea></div>
+          <div><button class="btn" type="submit" id="submit">Register</button></div>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="done" id="done" hidden>
+          <h3 id="done-title">Thank you. Your seat is reserved.</h3>
+          <p id="done-text">We look forward to seeing you.</p>
+          <button class="btn outline" type="button" id="again">Register someone else</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span>© 2026 Family Skills Workshop. Facilitated by Cynthia Ifeoma John.</span>
+    <span>FAML 445, Brigham Young University–Idaho</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('reg');
+  var status = document.getElementById('status');
+  var done = document.getElementById('done');
+  var use = function (n) { return (window.claude && window.claude.use) ? window.claude.use(n).catch(function () { return null; }) : Promise.resolve(null); };
+  var dbPromise = use('db');
+  var userPromise = use('user');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    status.className = 'status'; status.textContent = '';
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var sessions = Array.prototype.slice.call(form.querySelectorAll('input[name=sessions]:checked')).map(function (c) { return c.value; });
+    if (!name) { status.className = 'status err'; status.textContent = 'Enter your full name.'; form.name.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.className = 'status err'; status.textContent = 'Enter a valid email address, such as name@example.com.'; form.email.focus(); return; }
+    if (!sessions.length) { status.className = 'status err'; status.textContent = 'Choose at least one session.'; return; }
+
+    var entry = {
+      name: name, email: email, phone: form.phone.value.trim(),
+      party: form.party.value, role: form.role.value, sessions: sessions,
+      notes: form.notes.value.trim(), submittedAt: new Date().toISOString()
+    };
+    var btn = document.getElementById('submit');
+    btn.disabled = true; btn.textContent = 'Registering…';
+    var saved = false;
+    try {
+      var db = await dbPromise;
+      var user = await userPromise;
+      var uid = user && await user.id();
+      if (db && uid) {
+        var prev = await db.doc('registrations/' + uid).get().catch(function () { return null; });
+        var list = (prev && prev.exists && prev.data() && prev.data().entries) || [];
+        list.push(entry);
+        await db.doc('registrations/' + uid).set({ entries: list, updatedAt: entry.submittedAt });
+        saved = true;
+      }
+    } catch (err) { saved = false; }
+    btn.disabled = false; btn.textContent = 'Register';
+
+    document.getElementById('done-title').textContent = 'Thank you, ' + name.split(' ')[0] + '. Your seat is reserved.';
+    document.getElementById('done-text').textContent = saved
+      ? 'You are registered for ' + sessions.join(', ') + '. A reminder will be sent to ' + email + ' before your first session.'
+      : 'We received your details for ' + sessions.join(', ') + '. To confirm your seat, please also email the facilitator at familyskillsworkshop@gmail.com.';
+    form.hidden = true; done.hidden = false;
+  });
+
+  document.getElementById('again').addEventListener('click', function () {
+    form.reset(); status.textContent = ''; done.hidden = true; form.hidden = false; form.name.focus();
+  });
+})();
+</script>
